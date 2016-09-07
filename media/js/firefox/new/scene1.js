@@ -15,11 +15,14 @@
     // duplicate and move /all link for desktop test
     var setupTest = function(version) {
         var $dlButton = $('#download-button-desktop-release');
+        var $fxFooterLink;
         var $newLink;
         var linkCss;
 
         // make sure desktop download button exists and user is on a recognized platform
         if ($dlButton.length && $dlButton.find('.unrecognized-download:visible').length === 0) {
+            $fxFooterLink = $('#fx-footer-links-desktop-all');
+
             linkCss = {
                 'display': 'inline-block',
                 'paddingTop': '10px'
@@ -27,7 +30,7 @@
 
             if (version === 1) {
                 // snag the link from the footer
-                $newLink = $('#fx-footer-links-desktop-all').clone();
+                $newLink = $fxFooterLink.clone();
 
                 // make footer element was found
                 if ($newLink.length) {
@@ -82,6 +85,14 @@
                     // open up said modal
                     Mozilla.Modal.createModal(this, $('#fx-modal'));
                 });
+
+                // add GA to 'Firefox for Other Platforms & Languages' footer link
+                $fxFooterLink.on('click', function() {
+                    dataLayer.push({
+                        'event': 'alternate-version',
+                        'link-name': 'Systems & Languages'
+                    });
+                });
             }
 
             // place the new link (modal or direct to /firefox/all) underneath
@@ -90,7 +101,10 @@
         }
     };
 
-    setupTest(version);
+    // initiate test if valid version supplied
+    if (version === 1 || version === 2) {
+        setupTest(version);
+    }
 
     var uiTourSendEvent = function(action, data) {
         var event = new CustomEvent('mozUITour', {
