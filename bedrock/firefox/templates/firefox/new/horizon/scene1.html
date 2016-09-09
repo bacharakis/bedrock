@@ -158,4 +158,7 @@
 
 {% block js %}
   {% javascript 'firefox_new_scene1' %}
+  {% if LANG == 'en-US' %}
+    {% javascript 'firefox_new_scene1_variations' %}
+  {% endif %}
 {% endblock %}

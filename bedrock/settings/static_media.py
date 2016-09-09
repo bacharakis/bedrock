@@ -1190,6 +1190,12 @@ PIPELINE_JS = {
         ),
         'output_filename': 'js/firefox_new_scene1-bundle.js',
     },
+    'firefox_new_scene1_variations': {
+        'source_filenames': (
+            'js/firefox/new/test-variations.js',
+        ),
+        'output_filename': 'js/firefox_new_scene1_variations-bundle.js',
+    },
     'firefox_new_scene2': {
         'source_filenames': (
             'js/firefox/new/scene2.js',
